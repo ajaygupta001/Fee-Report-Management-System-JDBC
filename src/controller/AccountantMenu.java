@@ -257,7 +257,7 @@ public class AccountantMenu {
 					break;
 				}
 			}
-			//------------------Export STUDENT Fee Details-----------------------------------------------------
+			//------------------Export STUDENT Fee Details PDF-----------------------------------------------------
 			else if(opt ==5) {
 				
 				while(true) {

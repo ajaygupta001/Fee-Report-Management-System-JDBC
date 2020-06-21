@@ -35,7 +35,7 @@ public class ExcelGeneration {
 		con = cm.getConnection();
 		
 	    stmt = con.createStatement();
-	    String sqlget = "SELECT * FROM STUDENT";
+	    String sqlget = "SELECT * FROM STUDENT ORDER BY ROLL_NO";
 	    ResultSet rs = stmt.executeQuery(sqlget);
 	    
 	    String[] col = {"ROLL_NO","NAME","DOB","ADDRESS","BRANCH","ACADEMIC_YEAR","GENDER","CONTACT"};
@@ -53,8 +53,9 @@ public class ExcelGeneration {
  		for(int i=0;i<col.length; i++) {
  			Cell cell = row_header.createCell(i);
  			cell.setCellValue(col[i]);
- 			
+ 			sheet.autoSizeColumn(i);
  		}
+ 		
  		int rowNumber=1;
 	    while(rs.next()){
 	    	roll_id  = rs.getInt("ROLL_NO");
@@ -69,18 +70,19 @@ public class ExcelGeneration {
 	     	
 	 		
 	 		
-				Row row = sheet.createRow(rowNumber++);
-			    row.createCell(0).setCellValue(roll_id);
-			    row.createCell(1).setCellValue(name);
-			    row.createCell(2).setCellValue(dob);
-			    row.createCell(3).setCellValue(address);
-			    row.createCell(4).setCellValue(branch);
-			    row.createCell(5).setCellValue(year);
-			    row.createCell(6).setCellValue(gender);
-			    row.createCell(7).setCellValue(contact);
-			
-			
-			
+			Row row = sheet.createRow(rowNumber++);
+		    row.createCell(0).setCellValue(roll_id);
+		    row.createCell(1).setCellValue(name);
+		    row.createCell(2).setCellValue(dob);
+		    row.createCell(3).setCellValue(address);
+		    row.createCell(4).setCellValue(branch);
+		    row.createCell(5).setCellValue(year);
+		    row.createCell(6).setCellValue(gender);
+		    row.createCell(7).setCellValue(contact);
+		    
+			for(int i=0;i<col.length;i++) {
+				sheet.autoSizeColumn(i);
+			}
 			OutputStream fileOut = new FileOutputStream("Student_Record.xls");
 			
 			wb.write(fileOut);
